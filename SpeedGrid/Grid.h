@@ -9,5 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface Grid : NSObject
-
+@property NSMutableArray *list;
+@property int currentTap;
+@property int totCount;
+-(BOOL) tap:(int) number;
+-(id) initWithNum:(int) number;
 @end

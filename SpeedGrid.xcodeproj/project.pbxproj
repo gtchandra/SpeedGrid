@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		021A28ED1AAB9935004B1C7F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021A28EC1AAB9935004B1C7F /* ViewController.m */; };
 		EB2DE9291A992DFF00DD2B48 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2DE9281A992DFF00DD2B48 /* main.m */; };
 		EB2DE92C1A992DFF00DD2B48 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2DE92B1A992DFF00DD2B48 /* AppDelegate.m */; };
-		EB2DE92F1A992DFF00DD2B48 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2DE92E1A992DFF00DD2B48 /* ViewController.m */; };
 		EB2DE9321A992DFF00DD2B48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB2DE9301A992DFF00DD2B48 /* Main.storyboard */; };
 		EB2DE9341A992DFF00DD2B48 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB2DE9331A992DFF00DD2B48 /* Images.xcassets */; };
 		EB2DE9371A992DFF00DD2B48 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB2DE9351A992DFF00DD2B48 /* LaunchScreen.xib */; };
 		EB2DE9431A992DFF00DD2B48 /* SpeedGridTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2DE9421A992DFF00DD2B48 /* SpeedGridTests.m */; };
+		EB2DE94E1A9935AE00DD2B48 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2DE94D1A9935AE00DD2B48 /* Grid.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,19 +28,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		021A28EB1AAB9935004B1C7F /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		021A28EC1AAB9935004B1C7F /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EB2DE9231A992DFF00DD2B48 /* SpeedGrid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeedGrid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2DE9271A992DFF00DD2B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB2DE9281A992DFF00DD2B48 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EB2DE92A1A992DFF00DD2B48 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EB2DE92B1A992DFF00DD2B48 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EB2DE92D1A992DFF00DD2B48 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		EB2DE92E1A992DFF00DD2B48 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EB2DE9311A992DFF00DD2B48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB2DE9331A992DFF00DD2B48 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EB2DE9361A992DFF00DD2B48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EB2DE93C1A992DFF00DD2B48 /* SpeedGridTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeedGridTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2DE9411A992DFF00DD2B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB2DE9421A992DFF00DD2B48 /* SpeedGridTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeedGridTests.m; sourceTree = "<group>"; };
+		EB2DE94C1A9935AE00DD2B48 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
+		EB2DE94D1A9935AE00DD2B48 /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,9 +86,11 @@
 			children = (
 				EB2DE92A1A992DFF00DD2B48 /* AppDelegate.h */,
 				EB2DE92B1A992DFF00DD2B48 /* AppDelegate.m */,
-				EB2DE92D1A992DFF00DD2B48 /* ViewController.h */,
-				EB2DE92E1A992DFF00DD2B48 /* ViewController.m */,
 				EB2DE9301A992DFF00DD2B48 /* Main.storyboard */,
+				021A28EB1AAB9935004B1C7F /* ViewController.h */,
+				021A28EC1AAB9935004B1C7F /* ViewController.m */,
+				EB2DE94C1A9935AE00DD2B48 /* Grid.h */,
+				EB2DE94D1A9935AE00DD2B48 /* Grid.m */,
 				EB2DE9331A992DFF00DD2B48 /* Images.xcassets */,
 				EB2DE9351A992DFF00DD2B48 /* LaunchScreen.xib */,
 				EB2DE9261A992DFF00DD2B48 /* Supporting Files */,
@@ -219,9 +224,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB2DE92F1A992DFF00DD2B48 /* ViewController.m in Sources */,
 				EB2DE92C1A992DFF00DD2B48 /* AppDelegate.m in Sources */,
 				EB2DE9291A992DFF00DD2B48 /* main.m in Sources */,
+				EB2DE94E1A9935AE00DD2B48 /* Grid.m in Sources */,
+				021A28ED1AAB9935004B1C7F /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +420,7 @@
 				EB2DE9481A992DFF00DD2B48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EB2DE9491A992DFF00DD2B48 /* Build configuration list for PBXNativeTarget "SpeedGridTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +429,7 @@
 				EB2DE94B1A992DFF00DD2B48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
