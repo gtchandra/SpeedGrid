@@ -9,10 +9,6 @@
 #import "Grid.h"
 
 @implementation Grid
--(id)init
-{
-    return [self initWithNum:5];
-}
 
 - (id)initWithNum:(int) number
 {
@@ -20,7 +16,7 @@
     if(self)
     {
         self.totCount=number;
-        self.list = [NSMutableArray array];
+        //self.list = [NSMutableArray array];
         for (NSInteger i=0;i < self.totCount;i++) {
             [self.list addObject:[NSNumber numberWithInteger:i+1]];
         }
@@ -28,13 +24,23 @@
         self.currentTap=0;
     }
     return self;
-
 }
+-(void) reset {
+    [self shuffle];
+    self.currentTap=0;
+}
+-(NSMutableArray *) list {
+    if (!_list) {
+        _list=[[NSMutableArray alloc] init];
+    }
+    return _list;
+}
+
 -(void) shuffle {
     NSUInteger count = [self.list count];
-    NSInteger remainingCount = count;
-    for (NSInteger i=0; i<count; i++) {
-        NSInteger exchangeIndex = i + arc4random_uniform(remainingCount);
+    NSUInteger remainingCount = count;
+    for (NSUInteger i=0; i<count; i++) {
+        NSUInteger exchangeIndex = i + arc4random_uniform(remainingCount);
         //NSLog(@"indexes i: %i exchange: %i remainingcount: %i", i, exchangeIndex,remainingCount);
         remainingCount--;
         [self.list exchangeObjectAtIndex:i withObjectAtIndex:exchangeIndex];

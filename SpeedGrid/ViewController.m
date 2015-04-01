@@ -21,7 +21,7 @@
 @implementation ViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.gridView =[[Grid alloc] initWithNum:10];
+    self.gridView =[[Grid alloc] initWithNum:20];
     self.topLabel.text=@"0";
     //necessary pass the subviewcontroller
     NSLog(@"CIAO set");
@@ -36,14 +36,16 @@
     self.timerStopped=NO;
     [[NSNotificationCenter defaultCenter]
      addObserver:self
-     selector:@selector(timeStopped:)
-     name:@"GridNotificationGameEnded"
-     object:nil];
+        selector:@selector(timeStopped:)
+            name:@"GridNotificationGameEnded"
+          object:nil];
 }
 - (IBAction)resetView:(id)sender {
-    [self viewDidLoad];
     NSLog(@"reset tapped");
-    
+    [self.gridView reset];
+    [self.collectionView reloadData];
+    self.timerCount=0;
+    self.timerStopped=NO;
 }
 
 -(void)timeStopped:(NSNotification*)note {
@@ -56,12 +58,14 @@
             self.timerCount++;
             self.topLabel.text=[NSString stringWithFormat:@"%ld", (long)self.timerCount];
     }
+/*
     else
     {
         [myTimer invalidate];
         myTimer = nil;
     }
-}
+*/
+ }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -81,11 +85,11 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell"forIndexPath:indexPath];
-    
+    [cell.layer setCornerRadius:10];
     // Configure the cell...
     
     NSNumber *cellValue = [self.gridView.list objectAtIndex:indexPath.row];
-    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(10, 10,cell.bounds.size.width-10,cell.bounds.size.height-10)];
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(7, 7,cell.bounds.size.width-14,cell.bounds.size.height-14)];
     label.font = [UIFont boldSystemFontOfSize:32];
     [label setText:[cellValue stringValue]];
     label.textColor = [UIColor whiteColor];

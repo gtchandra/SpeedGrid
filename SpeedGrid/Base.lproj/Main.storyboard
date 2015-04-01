@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hAG-kR-3oe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hAG-kR-3oe">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -20,13 +20,13 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BsD-qF-hjX">
                                 <rect key="frame" x="279" y="28" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Z10-yJ-e95">
                                 <rect key="frame" x="16" y="84" width="568" height="496"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WyY-TX-7AB">
-                                    <size key="itemSize" width="76" height="76"/>
+                                    <size key="itemSize" width="64" height="64"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -36,7 +36,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -49,9 +49,9 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5HC-zW-aIW">
-                                <rect key="frame" x="467" y="24" width="46" height="30"/>
+                                <rect key="frame" x="506" y="24" width="46" height="30"/>
                                 <state key="normal" title="RESET">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -59,14 +59,13 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="Z10-yJ-e95" secondAttribute="centerX" id="118-z9-F6H"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Z10-yJ-e95" secondAttribute="trailing" id="3ac-hO-NjR"/>
                             <constraint firstItem="l44-OC-8kH" firstAttribute="top" secondItem="Z10-yJ-e95" secondAttribute="bottom" constant="20" id="Amd-Mv-GNh"/>
                             <constraint firstItem="5HC-zW-aIW" firstAttribute="top" secondItem="YD3-SH-d4m" secondAttribute="bottom" constant="4" id="DKo-6M-UHy"/>
                             <constraint firstItem="Z10-yJ-e95" firstAttribute="leading" secondItem="loi-Cd-AEt" secondAttribute="leadingMargin" id="Oce-iA-Ell"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="5HC-zW-aIW" secondAttribute="trailing" constant="71" id="Ojq-9k-abs"/>
                             <constraint firstItem="BsD-qF-hjX" firstAttribute="top" secondItem="YD3-SH-d4m" secondAttribute="bottom" constant="8" symbolic="YES" id="P2B-LT-GNe"/>
                             <constraint firstItem="l44-OC-8kH" firstAttribute="top" secondItem="Z10-yJ-e95" secondAttribute="bottom" constant="28" id="Q0y-16-az6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Z10-yJ-e95" secondAttribute="trailing" constant="-22" id="X6R-IF-MIS"/>
@@ -75,6 +74,7 @@
                             <constraint firstItem="Z10-yJ-e95" firstAttribute="top" secondItem="BsD-qF-hjX" secondAttribute="bottom" constant="35" id="azp-lu-nGT"/>
                             <constraint firstItem="BsD-qF-hjX" firstAttribute="centerX" secondItem="Z10-yJ-e95" secondAttribute="centerX" id="gry-oN-T7s"/>
                             <constraint firstItem="Z10-yJ-e95" firstAttribute="leading" secondItem="loi-Cd-AEt" secondAttribute="leadingMargin" constant="67" id="jP4-kg-U4A"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5HC-zW-aIW" secondAttribute="trailing" constant="20" id="nrm-8u-k01"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -94,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kTw-qq-i2T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="706" y="435"/>
+            <point key="canvasLocation" x="654" y="457"/>
         </scene>
     </scenes>
 </document>
