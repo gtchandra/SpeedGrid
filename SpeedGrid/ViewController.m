@@ -57,6 +57,7 @@
     if (!self.timerStopped) {
             self.timerCount++;
             self.topLabel.text=[NSString stringWithFormat:@"%ld", (long)self.timerCount];
+        [self repaintCells];
     }
 /*
     else
@@ -83,6 +84,15 @@
     return [self.gridView.list count];
 }
 
+- (void) repaintCells {
+    for(UICollectionViewCell *cell in self.collectionView.visibleCells)
+    {
+        int rnum=80+ arc4random()%110;
+        cell.backgroundColor = [UIColor colorWithRed:(float)rnum/255.0 green:0 blue:0 alpha:1];
+    }
+
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell"forIndexPath:indexPath];
     [cell.layer setCornerRadius:10];
@@ -95,7 +105,9 @@
     label.textColor = [UIColor whiteColor];
     label.textAlignment=NSTextAlignmentCenter;
     label.tag = 237;
-    cell.backgroundColor = [UIColor redColor];
+    int rnum=80+ arc4random()%145;
+    cell.backgroundColor = [UIColor colorWithRed:(float)rnum/255.0 green:0 blue:0 alpha:1];
+    
     [[cell.contentView viewWithTag:237] removeFromSuperview];
     [label setUserInteractionEnabled:false];
     [cell.contentView addSubview:label];
