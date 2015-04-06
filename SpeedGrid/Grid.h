@@ -15,4 +15,5 @@
 -(BOOL) tap:(int) number;
 -(id) initWithNum:(int) number;
 -(void) reset;
+
 @end

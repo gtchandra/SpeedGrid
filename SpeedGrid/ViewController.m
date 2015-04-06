@@ -13,7 +13,7 @@
 @property Grid *gridView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UILabel *topLabel;
-@property NSInteger timerCount;
+@property NSTimeInterval timerCount;
 @property BOOL timerStopped;
 
 @end
@@ -21,7 +21,7 @@
 @implementation ViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.gridView =[[Grid alloc] initWithNum:20];
+    self.gridView =[[Grid alloc] initWithNum:6];
     self.topLabel.text=@"0";
     //necessary pass the subviewcontroller
     NSLog(@"CIAO set");
@@ -41,7 +41,6 @@
           object:nil];
 }
 - (IBAction)resetView:(id)sender {
-    NSLog(@"reset tapped");
     [self.gridView reset];
     [self.collectionView reloadData];
     self.timerCount=0;
@@ -56,8 +55,12 @@
 - (void)timeUpdate:(NSTimer *)myTimer {
     if (!self.timerStopped) {
             self.timerCount++;
-            self.topLabel.text=[NSString stringWithFormat:@"%ld", (long)self.timerCount];
-        [self repaintCells];
+            int seconds=self.timerCount/10;
+            int decimal=(int)self.timerCount % 10;
+            self.topLabel.text=[NSString stringWithFormat:@"[  %d:%d  ]", seconds,decimal];
+    }
+    else {
+        [self repaintCellsWithColor:[UIColor grayColor] withRandom:NO];
     }
 /*
     else
@@ -84,16 +87,25 @@
     return [self.gridView.list count];
 }
 
-- (void) repaintCells {
+- (void) repaintCellsWithColor:(UIColor *) color withRandom: (BOOL) random {
+    if (random) {
     for(UICollectionViewCell *cell in self.collectionView.visibleCells)
     {
-        int rnum=80+ arc4random()%110;
-        cell.backgroundColor = [UIColor colorWithRed:(float)rnum/255.0 green:0 blue:0 alpha:1];
+        int rnum= arc4random()%255;
+        cell.backgroundColor = [UIColor colorWithHue:rnum/255.0 saturation:1.0 brightness:0.9 alpha:1.0];
     }
-
+    }
+    else
+    {
+        NSLog(@"ramo else setta colore");
+        for(UICollectionViewCell *cell in self.collectionView.visibleCells)
+        {
+            cell.backgroundColor = color;
+        }
+    }
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *) collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell"forIndexPath:indexPath];
     [cell.layer setCornerRadius:10];
     // Configure the cell...
@@ -105,9 +117,7 @@
     label.textColor = [UIColor whiteColor];
     label.textAlignment=NSTextAlignmentCenter;
     label.tag = 237;
-    int rnum=80+ arc4random()%145;
-    cell.backgroundColor = [UIColor colorWithRed:(float)rnum/255.0 green:0 blue:0 alpha:1];
-    
+    cell.backgroundColor = [UIColor grayColor];
     [[cell.contentView viewWithTag:237] removeFromSuperview];
     [label setUserInteractionEnabled:false];
     [cell.contentView addSubview:label];
@@ -131,21 +141,12 @@
 
     int tappedValue=[[self.gridView.list objectAtIndex:indexPath.row] intValue];
     if ([self.gridView tap:(int)tappedValue]) {
+        [self repaintCellsWithColor:[UIColor whiteColor] withRandom:YES];
         UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
-        [UIView transitionWithView:cell
-                          duration:.2
-                           options:UIViewAnimationOptionTransitionCurlUp
-                        animations:^{
-                            
-                            //any animatable attribute here.
-                            //cell.frame = CGRectMake(3, 14, 100, 100);
-                            
-                        } completion:^(BOOL finished) {
-                            
-                            //whatever you want to do upon completion
-                            
-                        }];
-
+        
+        [UIView animateWithDuration: 0.3 animations:^{
+            cell.backgroundColor=[UIColor blackColor];
+        } completion:nil];
     }
     else
     {

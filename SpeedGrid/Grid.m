@@ -22,6 +22,7 @@
         }
         [self shuffle];
         self.currentTap=0;
+        
     }
     return self;
 }
