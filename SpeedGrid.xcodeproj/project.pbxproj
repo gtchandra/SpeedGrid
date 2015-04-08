@@ -15,6 +15,7 @@
 		EB2DE9371A992DFF00DD2B48 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB2DE9351A992DFF00DD2B48 /* LaunchScreen.xib */; };
 		EB2DE9431A992DFF00DD2B48 /* SpeedGridTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2DE9421A992DFF00DD2B48 /* SpeedGridTests.m */; };
 		EB2DE94E1A9935AE00DD2B48 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2DE94D1A9935AE00DD2B48 /* Grid.m */; };
+		EB91FBAE1AD443F200AAD2BB /* game-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB91FBAD1AD443F200AAD2BB /* game-info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		EB2DE9421A992DFF00DD2B48 /* SpeedGridTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeedGridTests.m; sourceTree = "<group>"; };
 		EB2DE94C1A9935AE00DD2B48 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
 		EB2DE94D1A9935AE00DD2B48 /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid.m; sourceTree = "<group>"; };
+		EB91FBAD1AD443F200AAD2BB /* game-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "game-info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		EB2DE9261A992DFF00DD2B48 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EB91FBAD1AD443F200AAD2BB /* game-info.plist */,
 				EB2DE9271A992DFF00DD2B48 /* Info.plist */,
 				EB2DE9281A992DFF00DD2B48 /* main.m */,
 			);
@@ -204,6 +207,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB91FBAE1AD443F200AAD2BB /* game-info.plist in Resources */,
 				EB2DE9321A992DFF00DD2B48 /* Main.storyboard in Resources */,
 				EB2DE9371A992DFF00DD2B48 /* LaunchScreen.xib in Resources */,
 				EB2DE9341A992DFF00DD2B48 /* Images.xcassets in Resources */,

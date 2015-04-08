@@ -12,8 +12,9 @@
 @property (nonatomic, strong) NSMutableArray *list;
 @property int currentTap;
 @property int totCount;
+@property int topScore;
 -(BOOL) tap:(int) number;
 -(id) initWithNum:(int) number;
 -(void) reset;
-
+-(void) updateTopScore:(int) currentScore;
 @end

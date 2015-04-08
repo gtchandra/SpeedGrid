@@ -22,10 +22,28 @@
         }
         [self shuffle];
         self.currentTap=0;
-        
+        NSUserDefaults* user = [NSUserDefaults standardUserDefaults];
+        if (![user objectForKey:@"topScore"])
+        {
+            [user setObject:[NSNumber numberWithInt:0]  forKey:@"topScore"];
+        }
+        self.topScore=[[user objectForKey:@"topScore"] intValue];
     }
     return self;
 }
+-(void) updateTopScore:(int) currentScore
+{
+    if (currentScore<self.topScore)
+    {
+        NSUserDefaults* user = [NSUserDefaults standardUserDefaults];
+        self.topScore=currentScore;        
+        [user setObject:[NSNumber numberWithInt:self.topScore]  forKey:@"topScore"];
+        [user synchronize];
+        NSLog(@"cur=%d top=%d",currentScore,self.topScore);
+    }
+}
+
+
 -(void) reset {
     [self shuffle];
     self.currentTap=0;
@@ -70,4 +88,37 @@ NSUInteger count = [self count];
         [self exchangeObjectAtIndex:i withObjectAtIndex:exchangeIndex];
     }
 */
+- (NSDictionary *)readGameInfo;
+
+{
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *plistPath = [rootPath stringByAppendingPathComponent:@"game-info.plist"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
+        plistPath = [[NSBundle mainBundle] pathForResource:@"game-info"ofType:@"plist"];
+    }
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    if (dict == nil) {
+        NSLog(@"Could not read plist at path %@", plistPath);
+        return nil;
+    }
+   NSLog(@"Read game stats from plist: %@", dict);
+    return dict;
+} 
+- (BOOL)writeGameInfo:(NSDictionary *) dictionary;
+
+{
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *plistPath = [rootPath stringByAppendingPathComponent:@"game-info.plist"];
+    BOOL success = [dictionary writeToFile:plistPath atomically:YES];
+    if(success) {
+        NSLog(@"Saved game stats to plist: %@", dictionary);
+        return YES;
+    } else {
+        NSLog(@"Could not save to plist at path %@", plistPath);
+        return NO;
+    }
+}
+
+
+
 @end

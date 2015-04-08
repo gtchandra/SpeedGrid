@@ -15,16 +15,18 @@
 @property (weak, nonatomic) IBOutlet UILabel *topLabel;
 @property NSTimeInterval timerCount;
 @property BOOL timerStopped;
+@property (weak, nonatomic) IBOutlet UILabel *topLeftLabel;
+
 
 @end
 
 @implementation ViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.gridView =[[Grid alloc] initWithNum:6];
-    self.topLabel.text=@"0";
+    self.gridView =[[Grid alloc] initWithNum:20];
+    self.topLabel.text=[NSString stringWithFormat:@"%d",self.gridView.topScore];
+    self.topLeftLabel.text=[NSString stringWithFormat:@"TOP [%@]",[self scoreView:self.gridView.topScore]];
     //necessary pass the subviewcontroller
-    NSLog(@"CIAO set");
     // Do any additional setup after loading the view.
     // link already defined by the specific outlet of datasource and delegate
     [NSTimer scheduledTimerWithTimeInterval:0.1
@@ -40,27 +42,50 @@
             name:@"GridNotificationGameEnded"
           object:nil];
 }
+
 - (IBAction)resetView:(id)sender {
     [self.gridView reset];
     [self.collectionView reloadData];
     self.timerCount=0;
+    if (self.timerStopped)
+    {
     self.timerStopped=NO;
+    [NSTimer scheduledTimerWithTimeInterval:0.1
+                                     target:self
+                                   selector:@selector(timeUpdate:)
+                                   userInfo:nil
+                                    repeats:YES];
+    }
 }
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 
 -(void)timeStopped:(NSNotification*)note {
     NSLog(@"notified %@",note);
+    [self.gridView updateTopScore:self.timerCount];
+    self.topLeftLabel.text=[NSString stringWithFormat:@"TOP [%@]",[self scoreView:self.gridView.topScore]];
     self.timerStopped=YES;
+}
+
+-(NSString *) scoreView:(int) score {
+    int seconds=score/10;
+    int decimal=(int)score % 10;
+    return [NSString stringWithFormat:@"%d:%d", seconds,decimal];
 }
 
 - (void)timeUpdate:(NSTimer *)myTimer {
     if (!self.timerStopped) {
             self.timerCount++;
-            int seconds=self.timerCount/10;
-            int decimal=(int)self.timerCount % 10;
-            self.topLabel.text=[NSString stringWithFormat:@"[  %d:%d  ]", seconds,decimal];
+            self.topLabel.text=[NSString stringWithFormat:@"[  %@  ]", [self scoreView:self.timerCount]];
     }
     else {
         [self repaintCellsWithColor:[UIColor grayColor] withRandom:NO];
+        [myTimer invalidate];
+        myTimer=nil;
     }
 /*
     else
@@ -82,6 +107,18 @@
 }
 
 
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+#pragma mark CollectionView
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSLog(@"item in collection: %lu", (unsigned long)[self.gridView.list count]);
     return [self.gridView.list count];
@@ -89,11 +126,11 @@
 
 - (void) repaintCellsWithColor:(UIColor *) color withRandom: (BOOL) random {
     if (random) {
-    for(UICollectionViewCell *cell in self.collectionView.visibleCells)
-    {
-        int rnum= arc4random()%255;
-        cell.backgroundColor = [UIColor colorWithHue:rnum/255.0 saturation:1.0 brightness:0.9 alpha:1.0];
-    }
+        for(UICollectionViewCell *cell in self.collectionView.visibleCells)
+        {
+            int rnum= arc4random()%255;
+            cell.backgroundColor = [UIColor colorWithHue:rnum/255.0 saturation:1.0 brightness:0.9 alpha:1.0];
+        }
     }
     else
     {
@@ -109,9 +146,14 @@
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell"forIndexPath:indexPath];
     [cell.layer setCornerRadius:10];
     // Configure the cell...
-    
     NSNumber *cellValue = [self.gridView.list objectAtIndex:indexPath.row];
+    
     UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(7, 7,cell.bounds.size.width-14,cell.bounds.size.height-14)];
+    // ALTERNATIVE CENTER MANAGEMENT
+    //UILabel *label=[[UILabel alloc] init];
+    //CGPoint superCenter = CGPointMake(CGRectGetMidX([cell bounds]), CGRectGetMidY([cell bounds]));
+    //[label setCenter:superCenter];
+    
     label.font = [UIFont boldSystemFontOfSize:32];
     [label setText:[cellValue stringValue]];
     label.textColor = [UIColor whiteColor];
@@ -125,16 +167,6 @@
     return cell;
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     //UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath: indexPath];

@@ -17,14 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BsD-qF-hjX">
-                                <rect key="frame" x="279" y="28" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Z10-yJ-e95">
-                                <rect key="frame" x="16" y="84" width="568" height="496"/>
+                                <rect key="frame" x="16" y="84" width="568" height="412"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WyY-TX-7AB">
                                     <size key="itemSize" width="64" height="64"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -49,7 +43,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5HC-zW-aIW">
-                                <rect key="frame" x="506" y="24" width="46" height="30"/>
+                                <rect key="frame" x="538" y="24" width="46" height="30"/>
                                 <state key="normal" title="RESET">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -58,23 +52,38 @@
                                     <action selector="resetView:" destination="hAG-kR-3oe" eventType="touchUpInside" id="6hJ-4r-bNb"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UzV-ID-yGd">
+                                <rect key="frame" x="16" y="28" width="149" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BsD-qF-hjX">
+                                <rect key="frame" x="279" y="28" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="Z10-yJ-e95" secondAttribute="centerX" id="118-z9-F6H"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Z10-yJ-e95" secondAttribute="trailing" id="3ac-hO-NjR"/>
-                            <constraint firstItem="l44-OC-8kH" firstAttribute="top" secondItem="Z10-yJ-e95" secondAttribute="bottom" constant="20" id="Amd-Mv-GNh"/>
-                            <constraint firstItem="5HC-zW-aIW" firstAttribute="top" secondItem="YD3-SH-d4m" secondAttribute="bottom" constant="4" id="DKo-6M-UHy"/>
+                            <constraint firstItem="5HC-zW-aIW" firstAttribute="trailing" secondItem="loi-Cd-AEt" secondAttribute="trailingMargin" id="4Bz-Oz-zHV"/>
+                            <constraint firstItem="5HC-zW-aIW" firstAttribute="top" secondItem="YD3-SH-d4m" secondAttribute="bottom" constant="3" id="DKo-6M-UHy"/>
                             <constraint firstItem="Z10-yJ-e95" firstAttribute="leading" secondItem="loi-Cd-AEt" secondAttribute="leadingMargin" id="Oce-iA-Ell"/>
                             <constraint firstItem="BsD-qF-hjX" firstAttribute="top" secondItem="YD3-SH-d4m" secondAttribute="bottom" constant="8" symbolic="YES" id="P2B-LT-GNe"/>
                             <constraint firstItem="l44-OC-8kH" firstAttribute="top" secondItem="Z10-yJ-e95" secondAttribute="bottom" constant="28" id="Q0y-16-az6"/>
+                            <constraint firstItem="UzV-ID-yGd" firstAttribute="top" secondItem="YD3-SH-d4m" secondAttribute="bottom" constant="8" id="VvC-iU-Acd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Z10-yJ-e95" secondAttribute="trailing" constant="-22" id="X6R-IF-MIS"/>
                             <constraint firstItem="Z10-yJ-e95" firstAttribute="leading" secondItem="loi-Cd-AEt" secondAttribute="leadingMargin" constant="-16" id="XFv-1q-zto"/>
                             <constraint firstItem="Z10-yJ-e95" firstAttribute="top" secondItem="BsD-qF-hjX" secondAttribute="bottom" constant="43" id="XW4-Bh-ar2"/>
                             <constraint firstItem="Z10-yJ-e95" firstAttribute="top" secondItem="BsD-qF-hjX" secondAttribute="bottom" constant="35" id="azp-lu-nGT"/>
+                            <constraint firstItem="l44-OC-8kH" firstAttribute="top" secondItem="Z10-yJ-e95" secondAttribute="bottom" constant="104" id="flY-ro-zle"/>
                             <constraint firstItem="BsD-qF-hjX" firstAttribute="centerX" secondItem="Z10-yJ-e95" secondAttribute="centerX" id="gry-oN-T7s"/>
+                            <constraint firstItem="UzV-ID-yGd" firstAttribute="leading" secondItem="loi-Cd-AEt" secondAttribute="leadingMargin" id="hJ2-GC-80O"/>
                             <constraint firstItem="Z10-yJ-e95" firstAttribute="leading" secondItem="loi-Cd-AEt" secondAttribute="leadingMargin" constant="67" id="jP4-kg-U4A"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="5HC-zW-aIW" secondAttribute="trailing" constant="20" id="nrm-8u-k01"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5HC-zW-aIW" secondAttribute="trailing" id="nrm-8u-k01"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -90,11 +99,12 @@
                     <connections>
                         <outlet property="collectionView" destination="Z10-yJ-e95" id="ow5-Qu-bYl"/>
                         <outlet property="topLabel" destination="BsD-qF-hjX" id="Xh7-g9-T9m"/>
+                        <outlet property="topLeftLabel" destination="UzV-ID-yGd" id="Ch6-ta-gqa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kTw-qq-i2T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="398" y="386"/>
+            <point key="canvasLocation" x="72" y="310"/>
         </scene>
     </scenes>
 </document>
