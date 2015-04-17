@@ -13,8 +13,9 @@
 @property int currentTap;
 @property int totCount;
 @property int topScore;
+@property (nonatomic) int score;
 -(BOOL) tap:(int) number;
 -(id) initWithNum:(int) number;
 -(void) reset;
--(void) updateTopScore:(int) currentScore;
+-(void) shuffle;
 @end

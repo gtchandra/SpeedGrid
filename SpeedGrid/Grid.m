@@ -21,6 +21,7 @@
             [self.list addObject:[NSNumber numberWithInteger:i+1]];
         }
         [self shuffle];
+        self.score=0;
         self.currentTap=0;
         NSUserDefaults* user = [NSUserDefaults standardUserDefaults];
         if (![user objectForKey:@"topScore"])
@@ -31,22 +32,28 @@
     }
     return self;
 }
--(void) updateTopScore:(int) currentScore
+-(void) setScore:(int) score
 {
-    if (currentScore<self.topScore)
+    if (_score > self.topScore)
     {
         NSUserDefaults* user = [NSUserDefaults standardUserDefaults];
-        self.topScore=currentScore;        
+        self.topScore=_score;
         [user setObject:[NSNumber numberWithInt:self.topScore]  forKey:@"topScore"];
         [user synchronize];
-        NSLog(@"cur=%d top=%d",currentScore,self.topScore);
+    }
+    if (score>=0)
+    {
+        _score=score;
+    }
+    else
+    {
+        _score=0;
     }
 }
 
-
 -(void) reset {
     [self shuffle];
-    self.currentTap=0;
+    self.score=0;
 }
 -(NSMutableArray *) list {
     if (!_list) {
@@ -58,6 +65,7 @@
 -(void) shuffle {
     NSUInteger count = [self.list count];
     NSUInteger remainingCount = count;
+    self.currentTap=0;
     for (NSUInteger i=0; i<count; i++) {
         NSUInteger exchangeIndex = i + arc4random_uniform(remainingCount);
         //NSLog(@"indexes i: %i exchange: %i remainingcount: %i", i, exchangeIndex,remainingCount);
@@ -69,9 +77,10 @@
     if ((number-1)==self.currentTap) {
         self.currentTap++;
         if (self.currentTap==self.totCount) {
+            dispatch_async(dispatch_get_main_queue(),^{
             [[NSNotificationCenter defaultCenter]
-             postNotificationName:@"GridNotificationGameEnded"
-             object:self];
+             postNotificationName:@"GridNotificationDone"
+             object:self];});
         }
         return true;
     }

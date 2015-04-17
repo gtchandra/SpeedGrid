@@ -16,16 +16,18 @@
 @property NSTimeInterval timerCount;
 @property BOOL timerStopped;
 @property (weak, nonatomic) IBOutlet UILabel *topLeftLabel;
-
+@property (nonatomic) int gameWon;
+@property (nonatomic) BOOL gameOver;
 
 @end
 
 @implementation ViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.gameWon=0;
     self.gridView =[[Grid alloc] initWithNum:20];
     self.topLabel.text=[NSString stringWithFormat:@"%d",self.gridView.topScore];
-    self.topLeftLabel.text=[NSString stringWithFormat:@"TOP [%@]",[self scoreView:self.gridView.topScore]];
+    [self scoreViewUpdate];
     //necessary pass the subviewcontroller
     // Do any additional setup after loading the view.
     // link already defined by the specific outlet of datasource and delegate
@@ -34,19 +36,22 @@
                                    selector:@selector(timeUpdate:)
                                    userInfo:nil
                                     repeats:YES];
-    self.timerCount=0;
+    self.timerCount=600;
     self.timerStopped=NO;
+    self.gameOver=NO;
     [[NSNotificationCenter defaultCenter]
      addObserver:self
-        selector:@selector(timeStopped:)
-            name:@"GridNotificationGameEnded"
+        selector:@selector(nextGame:)
+            name:@"GridNotificationDone"
           object:nil];
 }
 
 - (IBAction)resetView:(id)sender {
     [self.gridView reset];
+    [self scoreViewUpdate];
     [self.collectionView reloadData];
-    self.timerCount=0;
+    self.timerCount=600;
+    self.gameOver=NO;
     if (self.timerStopped)
     {
     self.timerStopped=NO;
@@ -64,23 +69,39 @@
 }
 
 
--(void)timeStopped:(NSNotification*)note {
+-(void)nextGame:(NSNotification*)note {
     NSLog(@"notified %@",note);
-    [self.gridView updateTopScore:self.timerCount];
-    self.topLeftLabel.text=[NSString stringWithFormat:@"TOP [%@]",[self scoreView:self.gridView.topScore]];
-    self.timerStopped=YES;
+    self.gameWon++;
+    self.gridView.score=self.gridView.score*2;
+    [self scoreViewUpdate];
+    [self.gridView shuffle];
+    [self.collectionView reloadData];
+    NSLog(@"NEW GAME");
+    [self repaintCellsWithColor:[UIColor whiteColor] withRandom:YES];
 }
 
--(NSString *) scoreView:(int) score {
-    int seconds=score/10;
-    int decimal=(int)score % 10;
+-(NSString *) timerView:(int) time {
+    int seconds=time/10;
+    int decimal=(int)time % 10;
     return [NSString stringWithFormat:@"%d:%d", seconds,decimal];
+}
+-(void) scoreViewUpdate {
+    self.topLeftLabel.text=[NSString stringWithFormat:@"s[%d]t[%d]",self.gridView.score,self.gridView.topScore];
+    NSLog(@"score updated");
 }
 
 - (void)timeUpdate:(NSTimer *)myTimer {
     if (!self.timerStopped) {
-            self.timerCount++;
-            self.topLabel.text=[NSString stringWithFormat:@"[  %@  ]", [self scoreView:self.timerCount]];
+        if (self.timerCount<=0) {
+            self.timerStopped=YES;
+            self.timerCount=0;
+            self.gameOver=YES;
+            }
+        else {
+            self.timerCount--;
+        }
+        self.topLabel.text=[NSString stringWithFormat:@"[  %@  ]", [self timerView:self.timerCount]];
+
     }
     else {
         [self repaintCellsWithColor:[UIColor grayColor] withRandom:NO];
@@ -125,6 +146,7 @@
 }
 
 - (void) repaintCellsWithColor:(UIColor *) color withRandom: (BOOL) random {
+    
     if (random) {
         for(UICollectionViewCell *cell in self.collectionView.visibleCells)
         {
@@ -134,7 +156,6 @@
     }
     else
     {
-        NSLog(@"ramo else setta colore");
         for(UICollectionViewCell *cell in self.collectionView.visibleCells)
         {
             cell.backgroundColor = color;
@@ -147,33 +168,27 @@
     [cell.layer setCornerRadius:10];
     // Configure the cell...
     NSNumber *cellValue = [self.gridView.list objectAtIndex:indexPath.row];
-    
-    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(7, 7,cell.bounds.size.width-14,cell.bounds.size.height-14)];
-    // ALTERNATIVE CENTER MANAGEMENT
-    //UILabel *label=[[UILabel alloc] init];
-    //CGPoint superCenter = CGPointMake(CGRectGetMidX([cell bounds]), CGRectGetMidY([cell bounds]));
-    //[label setCenter:superCenter];
-    
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0,cell.bounds.size.width,cell.bounds.size.height)];
     label.font = [UIFont boldSystemFontOfSize:32];
     [label setText:[cellValue stringValue]];
     label.textColor = [UIColor whiteColor];
     label.textAlignment=NSTextAlignmentCenter;
     label.tag = 237;
-    cell.backgroundColor = [UIColor grayColor];
+    cell.backgroundColor = [UIColor blueColor];
     [[cell.contentView viewWithTag:237] removeFromSuperview];
-    [label setUserInteractionEnabled:false];
     [cell.contentView addSubview:label];
-    [cell setUserInteractionEnabled:true];
     return cell;
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     //UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath: indexPath];
-
+    if (!self.gameOver)
+    {
     int tappedValue=[[self.gridView.list objectAtIndex:indexPath.row] intValue];
     if ([self.gridView tap:(int)tappedValue]) {
         [self repaintCellsWithColor:[UIColor whiteColor] withRandom:YES];
+        self.gridView.score=self.gridView.score+tappedValue*(1+self.gameWon);
         UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
         
         [UIView animateWithDuration: 0.3 animations:^{
@@ -182,7 +197,10 @@
     }
     else
     {
-        NSLog(@"TAPPED grid: %ld num: %@",(long)indexPath.row, [(NSNumber *)[self.gridView.list objectAtIndex:indexPath.row] stringValue]);
+        self.gridView.score=self.gridView.score/2;
+    }
+    NSLog(@"reached");
+    [self scoreViewUpdate];
     }
 }
 
